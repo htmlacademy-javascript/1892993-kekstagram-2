@@ -1,3 +1,4 @@
 import { templateProfiles } from './data.js';
+import { initThumbnail } from './render-thumbnails.js';
 
-console.log(templateProfiles);
+initThumbnail(templateProfiles);
