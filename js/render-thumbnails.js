@@ -1,22 +1,27 @@
 const sectionPictures = document.querySelector('.pictures');
+const elementPicture = document.querySelector('#picture')
+  .content
+  .querySelector('.picture');
 
-const templateThumbnail = ({url, description, likes, comments}) => `<a href="#" class="picture">
-      <img class="picture__img" src="${url}" width="182" height="182" alt="${description}">
-      <p class="picture__info">
-        <span class="picture__comments">${comments.length}</span>
-        <span class="picture__likes">${likes}</span>
-      </p>
-    </a>`;
+const fragment = document.createDocumentFragment();
+let thumbnails = [];
 
-const renderThumbnail = (data) => {
-  let fragment = document.createDocumentFragment();
+const renderThumbnail = (element) => {
+  const picture = elementPicture.cloneNode(true);
+  const pictureImg = picture.querySelector('.picture__img');
+  const pictureLikes = picture.querySelector('.picture__likes');
+  const pictureComments = picture.querySelector('.picture__comments');
 
-  data.forEach((thumbnail) => {
-    fragment += templateThumbnail(thumbnail);
-  });
-  sectionPictures.insertAdjacentHTML('afterbegin', fragment);
+  pictureImg.src = element.url;
+  pictureImg.alt = element.description;
+  pictureLikes.textContent = element.likes;
+  pictureComments.textContent = element.comments.length;
+  fragment.appendChild(picture);
+  sectionPictures.appendChild(fragment);
 };
 
 export const initThumbnail = (data) => {
-  renderThumbnail(data);
+  thumbnails = data.slice();
+
+  thumbnails.forEach((element) => renderThumbnail(element));
 };
