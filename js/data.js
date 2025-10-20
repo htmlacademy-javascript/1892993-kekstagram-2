@@ -16,7 +16,7 @@ const templateProfile = (index) => ({
   url: `photos/${index}.jpg`,
   description: DESCRIPTION[getRandomInt(0, DESCRIPTION.length - 1)],
   likes: getRandomInt(15, 200),
-  comments: Array.from({length: getRandomInt(1, 2)}, templateComments)
+  comments: Array.from({length: getRandomInt(1, 20)}, templateComments)
 });
 
 export const templateProfiles = Array.from({length: NUMBER_TEMPLATES}, (_, index) => templateProfile(index));
