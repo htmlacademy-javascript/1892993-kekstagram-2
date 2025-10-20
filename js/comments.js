@@ -2,20 +2,27 @@ const DRAWING_COMMENTS = 5;
 
 const bigPictureCommentsContainer = document.querySelector ('.social__comments');
 const commentsLoader = document.querySelector ('.comments-loader');
-const commentCount = document.querySelector ('.social__comment-count');
-const getCommentTemplate = ({avatar, name, message}) => `<li class="social__comment">
-<img
-    class="social__picture"
-    src="${avatar}"
-    alt="${name}"
-    width="35" height="35">
-<p class="social__text">${message}</p>
-</li>`;
+const commentCountContainer = document.querySelector('.social__comment-count');
+const commentsCount = document.querySelector('.social__comment-total-count');
+const commentsCurrentCount = document.querySelector('.social__comment-shown-count');
+const socialCommentTemplate = document.querySelector('.social__comment');
 
 let comments = [];
 let countShownComments = 0;
 
+const getCommentTemplate = ({avatar, name, message}) => {
+  const socialComment = socialCommentTemplate.cloneNode(true);
+
+  socialComment.querySelector('.social__picture').src = avatar;
+  socialComment.querySelector('.social__picture').alt = name;
+  socialComment.querySelector('.social__text').textContent = message;
+
+  return socialComment;
+};
+
 const renderComments = () => {
+  const commentFragment = document.createDocumentFragment();
+
   countShownComments += DRAWING_COMMENTS;
   if (countShownComments >= comments.length) {
     commentsLoader.classList.add('hidden');
@@ -24,11 +31,16 @@ const renderComments = () => {
     commentsLoader.classList.remove('hidden');
   }
   bigPictureCommentsContainer.innerHTML = '';
-  const commentsTemplate = comments.slice(0, countShownComments).map((comment) => getCommentTemplate(comment)).join('');
-  bigPictureCommentsContainer.insertAdjacentHTML('beforeend',commentsTemplate);
-  commentCount.innerHTML = '';
+  const currentСomments = comments.slice(0, countShownComments);
+  currentСomments.forEach((comment) => commentFragment.append(getCommentTemplate(comment)));
+
+  bigPictureCommentsContainer.append(commentFragment);
+
   if (countShownComments > 0) {
-    commentCount.innerHTML = `${countShownComments} из <span class="comments-count">${comments.length} комментариев</span>`;
+    commentsCount.textContent = comments.length;
+    commentsCurrentCount.textContent = countShownComments;
+  } else {
+    commentCountContainer.innerHTML = '';
   }
 };
 
