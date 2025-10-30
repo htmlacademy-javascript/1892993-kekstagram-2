@@ -1,9 +1,11 @@
 import { isEscapeKey } from './util.js';
 import { uploadImageElement } from './upload-image.js';
+import { ininScaleControl, destroyScaleControl } from './scale-control.js';
+import { initEffects, destroyEffects } from './effect-image.js';
 
 const imgOploadOverlay = document.querySelector('.img-upload__overlay');
 const cancelButton = document.querySelector('#upload-cancel');
-const loadingPicture = document.querySelector('.img-upload__preview img');
+export const loadingPicture = document.querySelector('.img-upload__preview img');
 const uploadForm = document.querySelector('.img-upload__form');
 const hashtagField = document.querySelector('.text__hashtags');
 const commentField = document.querySelector('.text__description');
@@ -87,6 +89,8 @@ const closeForm = () => {
 
 function destroyForm () {
   closeForm();
+  destroyScaleControl();
+  destroyEffects();
   pristine.reset();
   uploadForm.reset();
 
@@ -106,6 +110,8 @@ pristine.addValidator(hashtagField, validateTagsLength, ErrorMessage.BAD_HASHTAG
 
 export const initForm = (file) => {
   openForm(file);
+  ininScaleControl();
+  initEffects();
 
   cancelButton.addEventListener('click', onCancelButtonClick);
   document.addEventListener('keydown', onDocumentEscKeydown);
