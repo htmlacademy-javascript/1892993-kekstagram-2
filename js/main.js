@@ -4,3 +4,4 @@ import { initUploadImage } from './upload-image.js';
 
 initThumbnail(templateProfiles);
 initUploadImage();
+
