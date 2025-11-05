@@ -9,6 +9,7 @@ export const loadingPicture = document.querySelector('.img-upload__preview img')
 const uploadForm = document.querySelector('.img-upload__form');
 const hashtagField = document.querySelector('.text__hashtags');
 const commentField = document.querySelector('.text__description');
+const submitButton = document.querySelector('.img-upload__submit');
 
 const TAG_COUNT_MAX = 5;
 const TAG_PATTERN = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -48,7 +49,7 @@ const onCancelButtonClick = (evt) => {
   destroyForm();
 };
 
-const onDocumentEscKeydown = (evt) => {
+export const onDocumentEscKeydown = (evt) => {
   if (isEscapeKey(evt) && !isHashtagFieldOrCommentFieldFocus) {
     destroyForm();
   }
@@ -87,7 +88,19 @@ const closeForm = () => {
   document.body.classList.remove('modal-open');
 };
 
-function destroyForm () {
+export const removeFormListeners = () => {
+  cancelButton.removeEventListener('click', onCancelButtonClick);
+  document.removeEventListener('keydown', onDocumentEscKeydown);
+  submitButton.disabled = true;
+};
+
+export const addFormListeners = () => {
+  cancelButton.addEventListener('click', onCancelButtonClick);
+  document.addEventListener('keydown', onDocumentEscKeydown);
+  submitButton.disabled = false;
+};
+
+export function destroyForm () {
   closeForm();
   destroyScaleControl();
   destroyEffects();
@@ -113,15 +126,24 @@ export const initForm = (file) => {
   ininScaleControl();
   initEffects();
 
+  submitButton.disabled = false;
+
   cancelButton.addEventListener('click', onCancelButtonClick);
   document.addEventListener('keydown', onDocumentEscKeydown);
   hashtagField.addEventListener('focus', onHashtagFieldFocus);
   commentField.addEventListener('focus', onCommentFieldFocus);
+};
 
-  uploadForm.addEventListener('submit', (evt) => {
+export const setOnFormSubmit = (cb) => {
+  uploadForm.addEventListener ('submit', async (evt) => {
+    evt.preventDefault();
+
     const isValid = pristine.validate();
-    if (!isValid) {
-      evt.preventDefault();
+
+    if (isValid) {
+      submitButton.disabled = true;
+
+      await cb(new FormData(uploadForm));
     }
   });
 };
