@@ -39,10 +39,16 @@ const addClickHandlerToContainer = () => {
   sectionPictures.addEventListener('click', onPicturesContainerClick);
 };
 
-export const initThumbnail = (data) => {
+export const initThumbnails = (data) => {
   pictures = data.slice();
 
   addClickHandlerToContainer();
 
   pictures.forEach((element) => renderThumbnail(element));
+};
+
+export const destroyThumbnails = () => {
+  const picturesElements = sectionPictures.querySelectorAll('.picture');
+
+  picturesElements.forEach((pictureElement) => pictureElement.remove());
 };

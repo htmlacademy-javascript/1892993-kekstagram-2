@@ -1,13 +1,13 @@
 
-import { initThumbnail } from './render-thumbnails.js';
 import { initUploadImage } from './upload-image.js';
 import { getData, sendData } from './api.js';
 import { showDataError, showErrorMessage, showSuccessMessage } from './util.js';
 import { setOnFormSubmit, removeFormListeners, destroyForm } from './form.js';
+import { initFilter } from './filter.js';
 
 try {
   const gata = await getData();
-  initThumbnail(gata);
+  initFilter(gata);
 } catch {
   showDataError();
 }
