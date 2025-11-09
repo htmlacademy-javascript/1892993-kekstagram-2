@@ -14,6 +14,7 @@ const elementFormSuccess = document.querySelector('#success')
 const body = document.querySelector('body');
 
 const ALERT_SHOW_TIME = 5000;
+const TIMEOUT_DELAY = 500;
 
 export const showDataError = () => {
   const dataError = elementDataError.cloneNode(true);
@@ -104,4 +105,14 @@ export const showSuccessMessage = () => {
   }
 
   body.appendChild(formSuccess);
+};
+
+export const debounce = (callback, timeoutDelay = TIMEOUT_DELAY) => {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
 };
