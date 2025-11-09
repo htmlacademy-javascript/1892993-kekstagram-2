@@ -36,21 +36,18 @@ export const showErrorMessage = () => {
 
   const onDocumentErrorClick = (evt) => {
     if (!isErrorInnerFocused(evt)) {
-      formError.remove();
       destroyHandlersError();
       addFormListeners();
     }
   };
 
   const onErrorButtonClick = () => {
-    formError.remove();
     destroyHandlersError();
     addFormListeners();
   };
 
   const onErrorButtonKeydown = (evt) => {
     if(isEscapeKey(evt)) {
-      formError.remove();
       destroyHandlersError();
       addFormListeners();
     }
@@ -61,6 +58,7 @@ export const showErrorMessage = () => {
   document.body.addEventListener('click', onDocumentErrorClick);
 
   function destroyHandlersError () {
+    formError.remove();
     errorButton.removeEventListener('click', onErrorButtonClick);
     document.removeEventListener('keydown', onErrorButtonKeydown);
     document.body.removeEventListener('click', onDocumentErrorClick);
@@ -78,33 +76,31 @@ export const showSuccessMessage = () => {
   const formSuccess = elementFormSuccess.cloneNode(true);
   const successButton = formSuccess.querySelector('.success__button');
 
-  const onDocumentErrorClick = (evt) => {
+  const onDocumentSuccessClick = (evt) => {
     if (!isSuccessInnerFocused(evt)) {
-      formSuccess.remove();
-      destroyHandlersError();
+      destroyHandlersSucces();
     }
   };
 
-  const onErrorButtonClick = () => {
-    formSuccess.remove();
-    destroyHandlersError();
+  const onSuccessButtonClick = () => {
+    destroyHandlersSucces();
   };
 
-  const onErrorButtonKeydown = (evt) => {
+  const onSuccessButtonKeydown = (evt) => {
     if(isEscapeKey(evt)) {
-      formSuccess.remove();
-      destroyHandlersError();
+      destroyHandlersSucces();
     }
   };
 
-  successButton.addEventListener('click', onErrorButtonClick);
-  document.addEventListener('keydown', onErrorButtonKeydown);
-  document.body.addEventListener('click', onDocumentErrorClick);
+  successButton.addEventListener('click', onSuccessButtonClick);
+  document.addEventListener('keydown', onSuccessButtonKeydown);
+  document.body.addEventListener('click', onDocumentSuccessClick);
 
-  function destroyHandlersError () {
-    successButton.removeEventListener('click', onErrorButtonClick);
-    document.removeEventListener('keydown', onErrorButtonKeydown);
-    document.body.removeEventListener('click', onDocumentErrorClick);
+  function destroyHandlersSucces () {
+    formSuccess.remove();
+    successButton.removeEventListener('click', onSuccessButtonClick);
+    document.removeEventListener('keydown', onSuccessButtonKeydown);
+    document.body.removeEventListener('click', onDocumentSuccessClick);
   }
 
   body.appendChild(formSuccess);
