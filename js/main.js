@@ -23,6 +23,4 @@ setOnFormSubmit(async (data) => {
   }
 });
 
-
 initUploadImage();
-
