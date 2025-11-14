@@ -5,6 +5,7 @@ import { showDataError, showErrorMessage, showSuccessMessage } from './util.js';
 import { setOnFormSubmit, removeFormListeners, destroyForm } from './form.js';
 import { initFilter } from './filter.js';
 
+
 try {
   const gata = await getData();
   initFilter(gata);
