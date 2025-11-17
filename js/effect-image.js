@@ -1,6 +1,6 @@
 import { loadingPicture } from './form.js';
 
-const EFFECTS = {
+const Effects = {
   none: {
     style: 'none',
     min: 0,
@@ -51,7 +51,7 @@ const EFFECTS = {
   },
 };
 
-const defaultEffect = EFFECTS.none;
+const defaultEffect = Effects.none;
 let chosenEffect = defaultEffect;
 
 const effectsListElements = document.querySelector('.effects');
@@ -90,7 +90,7 @@ const onEffectsChange = (evt) => {
   if (!evt.target.classList.contains('effects__radio')) {
     return;
   }
-  chosenEffect = EFFECTS[evt.target.value];
+  chosenEffect = Effects[evt.target.value];
   loadingPicture.className = (`effects__preview--${chosenEffect.name}`);
   updateEffects();
 };

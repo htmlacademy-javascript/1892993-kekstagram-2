@@ -1,8 +1,6 @@
 import { initThumbnails, destroyThumbnails } from './render-thumbnails.js';
 import { debounce } from './util.js';
 
-const filterElement = document.querySelector('.img-filters');
-
 const MAX_RANDOM_THUMBNAILS_COUNT = 10;
 
 const Filter = {
@@ -10,6 +8,8 @@ const Filter = {
   RANDOM: 'filter-random',
   DISCUSSED: 'filter-discussed',
 };
+
+const filterElement = document.querySelector('.img-filters');
 
 let currentFilter = Filter.DEFAULT;
 let thumbnailData = [];
