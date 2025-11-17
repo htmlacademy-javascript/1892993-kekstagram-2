@@ -3,14 +3,6 @@ import { uploadImageElement } from './upload-image.js';
 import { ininScaleControl, destroyScaleControl } from './scale-control.js';
 import { initEffects, destroyEffects } from './effect-image.js';
 
-const imgOploadOverlay = document.querySelector('.img-upload__overlay');
-const cancelButton = document.querySelector('#upload-cancel');
-export const loadingPicture = document.querySelector('.img-upload__preview img');
-const uploadForm = document.querySelector('.img-upload__form');
-const hashtagField = document.querySelector('.text__hashtags');
-const commentField = document.querySelector('.text__description');
-const submitButton = document.querySelector('.img-upload__submit');
-
 const TAG_COUNT_MAX = 5;
 const TAG_PATTERN = /^#[a-zа-яё0-9]{1,19}$/i;
 
@@ -19,6 +11,14 @@ const ErrorMessage = {
   BAD_PATTERN: 'Тег начинается с #. Внутри только латинские буквы, кириллица и числа.',
   BAD_UNIQUE_TAGS: 'Ваши теги повторяются. Проверьте уникальность каждого.',
 };
+
+const imgOploadOverlay = document.querySelector('.img-upload__overlay');
+const cancelButton = document.querySelector('#upload-cancel');
+export const loadingPicture = document.querySelector('.img-upload__preview img');
+const uploadForm = document.querySelector('.img-upload__form');
+const hashtagField = document.querySelector('.text__hashtags');
+const commentField = document.querySelector('.text__description');
+const submitButton = document.querySelector('.img-upload__submit');
 
 let isHashtagFieldOrCommentFieldFocus = false;
 
