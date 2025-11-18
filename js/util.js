@@ -1,5 +1,8 @@
 import { addFormListeners } from './form.js';
 
+const ALERT_SHOW_TIME = 5000;
+const TIMEOUT_DELAY = 500;
+
 export const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const elementDataError = document.querySelector('#data-error')
@@ -12,9 +15,6 @@ const elementFormSuccess = document.querySelector('#success')
   .content
   .querySelector('.success');
 const body = document.querySelector('body');
-
-const ALERT_SHOW_TIME = 5000;
-const TIMEOUT_DELAY = 500;
 
 export const showDataError = () => {
   const dataError = elementDataError.cloneNode(true);
